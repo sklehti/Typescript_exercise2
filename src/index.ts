@@ -1,14 +1,21 @@
 import express from "express";
 import medicalRecordsRouter from "./routes/medicalRecords";
 import patientInformations from "./routes/patientInformations";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
 
 const PORT = 3001;
 
+app.use(
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+
 app.get("/api/ping", (_req, res) => {
-  res.set("Access-Control-Allow-Origin", "http://localhost:3000");
   console.log("someone pinged here");
   res.send("pong");
 });
